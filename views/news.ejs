@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- title是从后台传递过来的值，也可以叫作模板中的变量 -->
+    <title></title>
+  </head>
+  <body>
+    <h3>EJS循环渲染数据</h3>
+    <!-- 循环和绑定数据 -->
+    <ul>
+      <%for(var i=0; i<list.length; i++){%>
+        <li><%=list[i]%></li>  
+      <%}%>
+    </ul>
+
+    <!-- 会解析content中的HTML标签 -->
+    <%-content%>
+
+    <!-- 条件判断 -->
+    <%if(num > 100){%>
+      <div>大于100</div>
+    <%}else{%>
+      <div>小于100</div>
+    <%}%>
+
+  </body>
+</html>
