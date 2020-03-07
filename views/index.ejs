@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- title是从后台传递过来的值，也可以叫作模板中的变量 -->
-    <title></title>
+    <title>ejs</title>
   </head>
   <body>
+    <%- include ('public/header.ejs') %>
     <h3>EJS简单使用</h3>
+    <!-- title是从后台传递过来的值，也可以叫作模板中的变量 -->
     <p><%= title %></p>
-    <p><%= username %></p>
   </body>
 </html>
