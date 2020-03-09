@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首页</title>
+    <style>
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .table td,
+      .table th {
+        border: 1px solid #ccc;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>用户列表</h2>
+    <a href="add">增加用户</a>
+    <table class="table">
+      <tr>
+        <th>用户名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>操作</th>
+      </tr>
+      {{each data}}
+      <tr>
+        <td>{{$value.username}}</td>
+        <td>{{$value.age}}</td>
+        <td>{{$value.sex === 'female' ? '女' : '男'}}</td>
+        <td>
+          <!-- 不加@，传过去的id会有引号 -->
+          <a href="/edit?id={{@$value._id}}">编辑</a>
+          <span> | </span>
+          <a href="#">删除</a>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  </body>
+</html>
