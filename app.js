@@ -23,11 +23,6 @@ router
   .get('/add', async (ctx, next) => {
     await ctx.render('add')
   })
-  .get('/edit', async (ctx, next) => {
-    // 根据传递过来的id获取用户信息
-    const { id } = ctx.query
-    await ctx.render('edit')
-  })
   // 往数据库增加用户
   .post('/addUser', async (ctx, next) => {
     const data = await DB.insert('user', ctx.request.body)
@@ -40,28 +35,40 @@ router
       ctx.redirect('/add')
     }
   })
-// .get('/edit', async (ctx, next) => {
-//   const data = await DB.update(
-//     'user',
-//     {
-//       username: '小畅叙'
-//     },
-//     {
-//       username: 'zoeeying'
-//     }
-//   )
-//   if (data.result.ok === 1) {
-//     ctx.body = '数据修改成功！'
-//   }
-// })
-// .get('/delete', async (ctx, next) => {
-//   const data = await DB.remove('user', {
-//     username: 'zoeeying'
-//   })
-//   if (data.result.ok === 1) {
-//     ctx.body = '数据删除成功！'
-//   }
-// })
+  .get('/edit', async (ctx, next) => {
+    // 根据传递过来的id获取用户信息
+    const { id } = ctx.query
+    const data = await DB.find('user', { _id: DB.getObjectId(id) })
+    await ctx.render('edit', { data: data[0] })
+  })
+  .post('/editUser', async (ctx, next) => {
+    const { id, username, age, sex } = ctx.request.body
+    const data = await DB.update(
+      'user',
+      { _id: DB.getObjectId(id) },
+      { username, age, sex }
+    )
+    try {
+      if (data.result.ok) {
+        ctx.redirect('/')
+      }
+    } catch (err) {
+      console.log(err)
+      ctx.redirect('/add')
+    }
+  })
+  .get('/delete', async (ctx, next) => {
+    const { id } = ctx.query
+    const data = await DB.delete('user', { _id: DB.getObjectId(id) })
+    try {
+      if (data.result.ok) {
+        ctx.redirect('/')
+      }
+    } catch (err) {
+      console.log(err)
+      ctx.redirect('/')
+    }
+  })
 
 app.use(router.routes()).use(router.allowedMethods())
 

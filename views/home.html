@@ -30,12 +30,12 @@
       <tr>
         <td>{{$value.username}}</td>
         <td>{{$value.age}}</td>
-        <td>{{$value.sex === 'female' ? '女' : '男'}}</td>
+        <td>{{$value.sex}}</td>
         <td>
           <!-- 不加@，传过去的id会有引号 -->
           <a href="/edit?id={{@$value._id}}">编辑</a>
           <span> | </span>
-          <a href="#">删除</a>
+          <a href="/delete?id={{@$value._id}}">删除</a>
         </td>
       </tr>
       {{/each}}

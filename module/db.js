@@ -1,8 +1,9 @@
 /**
  * DB类库
  */
-const MongoClient = require('mongodb').MongoClient
+const { MongoClient, ObjectID } = require('mongodb')
 const Config = require('./config')
+
 class DB {
   // 单例模式，可以实现多次实例化实例共享
   static getInstance() {
@@ -76,7 +77,7 @@ class DB {
       })
     })
   }
-  remove(collectionName, json) {
+  delete(collectionName, json) {
     return new Promise((resolve, reject) => {
       this.connect().then(db => {
         db.collection(collectionName).removeOne(json, (err, result) => {
@@ -88,6 +89,10 @@ class DB {
         })
       })
     })
+  }
+  getObjectId(id) {
+    // 把字符串id转换成对象id，用于根据_id查询文档
+    return new ObjectID(id)
   }
 }
 

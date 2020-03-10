@@ -8,18 +8,19 @@
   </head>
   <body>
     <h2 class="title">编辑用户</h2>
-    <form method="POST" action="/addUser">
+    <form method="POST" action="/editUser">
+      <input name="id" value="{{@data._id}}" type="hidden" />
       <strong>用户名：</strong>
       <br />
-      <input name="username" />
+      <input name="username" value="{{data.username}}" />
       <br />
       <strong>年龄：</strong>
       <br />
-      <input name="age" />
+      <input name="age" value="{{data.age}}" />
       <br />
       <strong>性别：</strong>
       <br />
-      <input name="sex" />
+      <input name="sex" value="{{data.sex}}" />
       <br />
       <br />
       <button type="submit">提交</button>
