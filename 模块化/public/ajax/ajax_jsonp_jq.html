@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script src="js/jquery-1.12.3.js"></script>
+
+    <!-- jsonp的原生js写法 -->
+    <script>
+      function fetchData(data) {
+        console.log(data)
+      }
+    </script>
+    <script src="http://localhost:3000/api/userlist?callback=fetchData"></script>
+
+    <!-- jsonp的jquery写法 -->
+    <!-- <script>
+      $(function() {
+        var url = 'http://localhost:3000/api/userlist'
+        $.ajax({
+          url: url,
+          dataType: 'jsonp', // 定义jsonp请求
+          data: '', // get传值
+          jsonp: 'callback', // 回调函数的参数
+          success: function(data) {
+            console.log(data)
+          },
+          timeout: 3000 // 超时时间
+        })
+      })
+    </script> -->
+  </head>
+  <body>
+    <p>jsonp</p>
+  </body>
+</html>
